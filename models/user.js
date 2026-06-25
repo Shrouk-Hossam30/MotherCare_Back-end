@@ -24,12 +24,15 @@ required:true
 
 role:{
 type:String,
+
 enum:[
 "mother",
 "doctor",
 "admin"
 ],
+
 default:"mother"
+
 }
 
 

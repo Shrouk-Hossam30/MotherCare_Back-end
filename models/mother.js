@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 
-const schema =
+const motherSchema =
 new mongoose.Schema({
 
 user:{
@@ -10,20 +10,29 @@ ref:"User"
 },
 
 
-age:Number,
-
 phone:String,
 
-pregnancyWeek:Number,
 
-expectedDelivery:Date,
+age:Number,
 
-healthNotes:String
 
-});
+healthNotes:String,
+
+
+children:[
+{
+type:mongoose.Schema.Types.ObjectId,
+ref:"Baby"
+}
+]
+
+
+},{
+timestamps:true
+})
 
 
 export default mongoose.model(
 "Mother",
-schema
-);
+motherSchema
+)

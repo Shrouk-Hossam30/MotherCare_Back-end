@@ -1,24 +1,25 @@
-import Post from "../models/Post.js";
+import Community from "../models/Community.js";
 
 
 
-// create post
+// Mother ask question
 
-export const createPost =
+export const createQuestion =
 async(req,res)=>{
 
 
-const post =
-await Post.create({
+const question =
+await Community.create({
 
 user:req.user.id,
 
-content:req.body.content
+question:req.body.question
 
 });
 
 
-res.json(post);
+res.status(201)
+.json(question);
 
 
 }
@@ -26,46 +27,49 @@ res.json(post);
 
 
 
-// get posts
 
-export const getPosts =
+// Doctor reply only
+
+export const replyQuestion =
 async(req,res)=>{
 
 
-const posts =
-await Post.find()
-.populate("user");
+if(req.user.role !== "doctor"){
 
+return res.status(403)
+.json({
 
-res.json(posts);
+message:"Only doctors can reply"
 
+})
 
 }
 
 
 
+const question =
+await Community.findByIdAndUpdate(
 
-// like post
+req.params.id,
 
-export const likePost =
-async(req,res)=>{
+{
+
+answer:req.user.id,
+
+answeredAt:new Date()
+
+},
+
+{
+new:true
+}
 
 
-const post =
-await Post.findById(
-req.params.id
 );
 
 
-post.likes.push(
-req.user.id
-);
 
-
-await post.save();
-
-
-res.json(post);
+res.json(question);
 
 
 }

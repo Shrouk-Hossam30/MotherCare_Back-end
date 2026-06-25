@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 
 
-const schema =new mongoose.Schema({
+const doctorSchema =
+new mongoose.Schema({
+
 
 user:{
 type:mongoose.Schema.Types.ObjectId,
@@ -18,9 +20,6 @@ experience:Number,
 certificate:String,
 
 
-availableSlots:[String],
-
-
 verified:{
 type:Boolean,
 default:false
@@ -33,5 +32,5 @@ default:false
 
 export default mongoose.model(
 "Doctor",
-schema
+doctorSchema
 );

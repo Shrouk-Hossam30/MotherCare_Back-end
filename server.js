@@ -6,39 +6,20 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 
 
-import authRoutes 
-from "./routes/authRoutes.js";
-
-import motherRoutes 
-from "./routes/motherRoutes.js";
-
-
-import babyRoutes
-from "./routes/babyRoutes.js";
-
-
-import doctorRoutes
-from "./routes/doctorRoutes.js";
-
-
-import appointmentRoutes
-from "./routes/appointmentRoutes.js";
-
-
-import communityRoutes
-from "./routes/communityRoutes.js";
-
-
-import adminRoutes
-from "./routes/adminRoutes.js";
-
-
-import medicalRoutes
-from "./routes/medicalRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import babyRoutes from "./routes/babyRoutes.js";
+import articleRoutes from "./routes/articleRoutes.js";
+import doctorRoutes from "./routes/doctorRoutes.js";
+import motherRoutes from "./routes/motherRoutes.js";
+import communityRoutes from "./routes/communityRoutes.js";
+import todoRoutes from "./routes/todoRoutes.js";
+import pointRoutes from "./routes/pointRoutes.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
 
 
 
 dotenv.config();
+
 
 
 const app =
@@ -48,13 +29,8 @@ express();
 
 app.use(cors());
 
+
 app.use(express.json());
-
-
-app.use(
-"/uploads",
-express.static("uploads")
-);
 
 
 
@@ -68,19 +44,16 @@ authRoutes
 );
 
 
-
-app.use(
-"/api/mother",
-motherRoutes
-);
-
-
-
 app.use(
 "/api/baby",
 babyRoutes
 );
 
+
+app.use(
+"/api/articles",
+articleRoutes
+);
 
 
 app.use(
@@ -89,12 +62,10 @@ doctorRoutes
 );
 
 
-
 app.use(
-"/api/appointment",
-appointmentRoutes
+"/api/mother",
+motherRoutes
 );
-
 
 
 app.use(
@@ -103,24 +74,32 @@ communityRoutes
 );
 
 
-
 app.use(
-"/api/admin",
-adminRoutes
+"/api/todo",
+todoRoutes
 );
 
 
+app.use(
+"/api/points",
+pointRoutes
+);
+
 
 app.use(
-"/api/medical",
-medicalRoutes
+"/api/notifications",
+notificationRoutes
 );
 
 
 
 app.listen(
-5000,
-()=>console.log(
+process.env.PORT,
+()=>{
+
+console.log(
 "Mother Care API Running"
 )
+
+}
 );

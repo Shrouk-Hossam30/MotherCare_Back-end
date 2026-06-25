@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 
 
-const schema =new mongoose.Schema({
+const babySchema =
+new mongoose.Schema({
+
 
 mother:{
 type:mongoose.Schema.Types.ObjectId,
@@ -9,33 +11,42 @@ ref:"Mother"
 },
 
 
-name:String,
+name:{
+type:String,
+required:true
+},
 
 
-birthDate:Date,
+birthDate:{
+type:Date,
+required:true
+},
 
 
-weight:Number,
+gender:String,
 
 
-height:Number,
+stage:{
+type:String,
 
-
-vaccines:[
-
-{
-name:String,
-date:Date
-}
-
+enum:[
+"day_one",
+"infant",
+"toddler",
+"child",
+"teenager"
 ]
 
+}
 
 
-});
+},{
+timestamps:true
+})
+
 
 
 export default mongoose.model(
 "Baby",
-schema
+babySchema
 );

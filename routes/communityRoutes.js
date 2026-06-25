@@ -1,14 +1,18 @@
 import express from "express";
 
+
 import {
-createPost,
-getPosts,
-likePost
+
+createQuestion,
+
+replyQuestion
+
 }
 from "../controllers/communityController.js";
 
 
-import {protect} from "../middleware/auth.js";
+import {protect}
+from "../middleware/auth.js";
 
 
 const router =
@@ -17,24 +21,17 @@ express.Router();
 
 
 router.post(
-"/",
+"/question",
 protect,
-createPost
-);
-
-
-
-router.get(
-"/",
-getPosts
+createQuestion
 );
 
 
 
 router.put(
-"/like/:id",
+"/reply/:id",
 protect,
-likePost
+replyQuestion
 );
 
 
