@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
 
 
-const schema =
-new mongoose.Schema({
-
+const schema =new mongoose.Schema({
 
 mother:{
 type:mongoose.Schema.Types.ObjectId,

@@ -4,21 +4,14 @@ import jwt from "jsonwebtoken";
 
 
 
-export const register =
-async(req,res)=>{
+export const register =async(req,res)=>{
 
 
-const {
-name,
-email,
-password,
-role
-}=req.body;
+const {name,email,password,role}=req.body;
 
 
 
-const exists =
-await User.findOne({email});
+const exists =await User.findOne({email});
 
 
 if(exists)
@@ -26,30 +19,9 @@ return res.json({
 message:"User exists"
 });
 
-
-
-const hash =
-await bcrypt.hash(
-password,
-10
-);
-
-
-
-const user =
-await User.create({
-
-name,
-email,
-password:hash,
-role
-
-});
-
-
+const hash =await bcrypt.hash(password,10);
+const user =await User.create({name,email,password:hash,role});
 res.json(user);
-
-
 }
 
 
@@ -98,12 +70,6 @@ role:user.role
 process.env.JWT_SECRET
 );
 
-
-
-res.json({
-token,
-user
-});
-
+res.json({token,user});
 
 }
